@@ -14,7 +14,9 @@
     (dolist (suffix '("lisp" "mac"))
       (let ((user-pre-hook-file (apply #'make-pathname (append user-pre-hook-base (list :type suffix)))))
         (if (probe-file user-pre-hook-file)
-            (load user-pre-hook-file) nil)))))
+            (if (eq suffix "lisp")
+                (load user-pre-hook-file)
+              (maxima::$load user-pre-hook-file)))))))
 
 ;; We need quicklisp to find the asd file in the sub-directory "src" of this directory.
 ;; We follow the advice on the web page below to use ql:*local-project-directories*.

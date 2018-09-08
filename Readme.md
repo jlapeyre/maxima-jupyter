@@ -28,14 +28,24 @@ To try Maxima-Jupyter you need :
 
  - Jupyter, or IPython 3.x
 
+ - If the build aborts because the file `zmq.h` is missing, you may need to
+   install the development files for the high-level C binding for ZeroMQ.
+   On debian-based systems, you can satisfy this requirement by installing
+   the package `libczmq-dev`.
 
 ## Quick Install
+
+### Install Jupyter
 
 I installed Jupyter via:
 
      python3 -m pip install jupyter
 
-There are two kernel installation techniques. The first is to create a saved
+There are two kernel installation techniques.
+
+### First kernel installation method
+
+The first is to create a saved
 image as detailed in [make-maxima-jupyter-recipe.txt][]. Once this image has
 been created then the installation script can be used with:
 
@@ -46,21 +56,40 @@ python3 ./install-maxima-jupyter.py --exec=path/to/maxima-jupyter
 Adding the option `--user` will install a user kernel instead of a system
 kernel.
 
+### Second kernel installation method
+
 The second installation method will run the kernel from an interactive Maxima
 session. The advantange to this technique is that the normal initialization
 behavior of Maxima, such as loading `maxima-init.mac` from the current directory
-will be preserved. After the files in `src` have been copied to an appropriate
-location such as `/usr/share/maxima-jupyter` for a system installation or
-`~/maxima-jupyter` for a user installation then the installation script called:
+will be preserved.
 
+1 Create a kernel directory for the kernel source files. For example `/usr/share/maxima-jupyter` for a system installation or
+ `~/maxima-jupyter` for a user installation. Alternatively, you can load the kernel from this
+ source distribution directory.
+ 
+2 Copy the directory `src` and its contents to the new kernel directory. For example `~/maxima-jupyter/src/`.
+
+3 Copy `load-maxima-jupyter-dynamic.lisp` to the kernel directory. For example `~/maxima-jupyter/load-maxima-jupyter-dynamic.lisp`.
+
+4 Optionally, copy one or both of `user-pre-hook.lisp` and `user-pre-hook.mac` to the kernel directory.
+  For example `~/maxima-jupyter/user-pre-hook.lisp`. Edit these files to add any code you want to 
+  run before the kernel is loaded. For instance, you may use them to load quicklisp. The jupyter kernel
+  will be loaded before your maxima init files are loaded, but after these hook files are loaded.
+
+5 Install the kernel specification file like this
 ```sh
 python3 ./install-maxima-jupyter.py --root=/path/to/maxima-jupyter-src
 ```
-
+where `--root` specifies the kernel directory you created and populated in the previous steps.
+To install the kernel specification file to a user directory rather than a system directory, do this
+```sh
+python3 ./install-maxima-jupyter.py --root=/path/to/maxima-jupyter-src --user
+```
 The option `--maxima` may also be used to specify the location of the Maxima
 executable. Please note that in order for this method to work quicklisp needs be
-loaded by default in every Maxima session. See quicklisp documentation for
-details.
+loaded by default in every Maxima session (possibly via the `user-pre-hook` files).
+See quicklisp documentation for details. The kernel specification file will be installed
+in a canonical Jupyter kernel directory.
 
 ## Installation on Arch/Manjaro
 

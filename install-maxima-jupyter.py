@@ -70,7 +70,7 @@ KERNEL_SPEC = {
     ] if args.root is None else [
         args.maxima,
         '--very-quiet',
-        '--preload-lisp={0}'.format(os.path.join(args.root, 'load-maxima-jupyter.lisp')),
+        '--preload-lisp={0}'.format(os.path.join(args.root, 'load-maxima-jupyter-dynamic.lisp')),
         '--batch-string=jupyter_kernel_start("{connection_file}")$'
     ],
     "display_name": "Maxima",

@@ -1,0 +1,4 @@
+/*
+ * This file may contain maxima code that will be executed before the maxima-jupyter kernel is loaded.
+ * For instance, it may be used to load quicklisp.
+*/

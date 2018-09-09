@@ -19,7 +19,7 @@
               (maxima::$load user-pre-hook-file)))))))
 
 ;; We need quicklisp to find the asd file in the sub-directory "src" of this directory.
-;; We follow the advice on the web page below to use ql:*local-project-directories*.
+;; We follow the advice on the web page below to modify ql:*local-project-directories*.
 ;; "Use Quicklisp to load personal projects from arbitrary locations."
 ;; https://www.darkchestnut.com/2016/quicklisp-load-personal-projects-from-arbitrary-locations/
 (let ((this-dir-list (pathname-directory *load-truename*))) ; get components of this directory

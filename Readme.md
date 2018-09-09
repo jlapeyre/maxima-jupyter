@@ -63,20 +63,20 @@ session. The advantange to this technique is that the normal initialization
 behavior of Maxima, such as loading `maxima-init.mac` from the current directory
 will be preserved.
 
-1 Create a kernel directory for the kernel source files. For example `/usr/share/maxima-jupyter` for a system installation or
+1. Create a kernel directory for the kernel source files. For example `/usr/share/maxima-jupyter` for a system installation or
  `~/maxima-jupyter` for a user installation. Alternatively, you can load the kernel from this
  source distribution directory.
- 
-2 Copy the directory `src` and its contents to the new kernel directory. For example `~/maxima-jupyter/src/`.
 
-3 Copy `load-maxima-jupyter-dynamic.lisp` to the kernel directory. For example `~/maxima-jupyter/load-maxima-jupyter-dynamic.lisp`.
+2. Copy the directory `src` and its contents to the new kernel directory. For example `~/maxima-jupyter/src/`.
 
-4 Optionally, copy one or both of `user-pre-hook.lisp` and `user-pre-hook.mac` to the kernel directory.
-  For example `~/maxima-jupyter/user-pre-hook.lisp`. Edit these files to add any code you want to 
+3. Copy `load-maxima-jupyter-dynamic.lisp` to the kernel directory. For example `~/maxima-jupyter/load-maxima-jupyter-dynamic.lisp`.
+
+4. Optionally, copy one or both of `user-pre-hook.lisp` and `user-pre-hook.mac` to the kernel directory.
+  For example `~/maxima-jupyter/user-pre-hook.lisp`. Edit these files to add any code you want to
   run before the kernel is loaded. For instance, you may use them to load quicklisp. The jupyter kernel
   will be loaded before your maxima init files are loaded, but after these hook files are loaded.
 
-5 Install the kernel specification file like this
+5. Install the kernel specification file like this
 ```sh
 python3 ./install-maxima-jupyter.py --root=/path/to/maxima-jupyter-src
 ```
